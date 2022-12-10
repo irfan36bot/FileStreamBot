@@ -1,1 +1,2 @@
-web: python -m WebStreamer
+web: python -m http.server $PORT
+worker: python3 -m WebStreamer
