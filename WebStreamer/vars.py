@@ -25,20 +25,16 @@ class Var(object):
     NO_PORT = True if str(NO_PORT).lower() == "true" else False
     if "DYNO" in environ:
         ON_HEROKU = True
-        APP_NAME = str(environ.get("APP_NAME"))
+        APP_NAME = str(getenv('APP_NAME'))
+    
     else:
         ON_HEROKU = False
-    FQDN = (
-        str(environ.get("FQDN", BIND_ADDRESS))
-        if not ON_HEROKU or environ.get("FQDN")
-        else APP_NAME + ".herokuapp.com"
-    )
-    if ON_HEROKU:
-        URL = f"https://{FQDN}/"
+    FQDN = str(getenv('FQDN', BIND_ADRESS)) if not ON_HEROKU or getenv('FQDN') else APP_NAME+'.herokuapp.com'
+    HAS_SSL=bool(getenv('HAS_SSL',False))
+    if HAS_SSL:
+        URL = "https://{}/".format(FQDN)
     else:
-        URL = "http{}://{}{}/".format(
-            "s" if HAS_SSL else "", FQDN, "" if NO_PORT else ":" + str(PORT)
-        )
+        URL = "http://{}/".format(FQDN)
 
     DATABASE_URL = str(environ.get('DATABASE_URL'))
     UPDATES_CHANNEL = str(environ.get('UPDATES_CHANNEL', "aredirect"))
