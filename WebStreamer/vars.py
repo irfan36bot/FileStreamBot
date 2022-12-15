@@ -29,7 +29,7 @@ class Var(object):
     
     else:
         ON_HEROKU = False
-    FQDN = str(environ.get('FQDN', BIND_ADRESS)) if not ON_HEROKU or environ.get('FQDN') else APP_NAME+'.herokuapp.com'
+    FQDN = str(environ.get('FQDN', BIND_ADDRESS)) if not ON_HEROKU or environ.get('FQDN') else APP_NAME+'.herokuapp.com'
     HAS_SSL=bool(environ.get('HAS_SSL',False))
     if HAS_SSL:
         URL = "https://{}/".format(FQDN)
