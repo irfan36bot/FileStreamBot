@@ -37,7 +37,6 @@ class Var(object):
     else:
         URL = "http://{}/".format(FQDN)
 
-    FQDN = "file-to-link-ds-botz.osc-fr1.scalingo.io"
     DATABASE_URL = str(environ.get('DATABASE_URL', "mongodb+srv://Irfan:786or786@cluster0.2jjhd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
     UPDATES_CHANNEL = str(environ.get('UPDATES_CHANNEL', "DS_Botz"))
     PAGE_LINK = environ.get('PAGE_LINK', None)
